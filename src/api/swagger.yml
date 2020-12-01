@@ -1,0 +1,37 @@
+swagger: "2.0"
+info:
+  description: "Sample project using Express Monitor and Express Swagger Middleware"
+  version: "1.0.0"
+  title: "Swagger Express Monitor"
+host: localhost:3000
+# basePath: /v1
+schemes:
+- "http"
+paths:
+  /health:
+    x-swagger-router-controller: system
+    get:
+      description: "Returns application ready status"
+      operationId: "getHealthStatus"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+  /ready:
+    x-swagger-router-controller: system
+    get:
+      description: "Returns application health status"
+      operationId: "getReadyStatus"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+definitions:
+  Sign:
+    type: object
+    properties:
+      name:
+        type: string
+        description: System name.

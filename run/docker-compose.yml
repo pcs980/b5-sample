@@ -1,0 +1,60 @@
+version: '3.3'
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:4.1.8-xenial
+    restart: always
+    networks:
+      - b5-net
+    ports:
+      - 27017:27017
+
+  rabbit:
+    container_name: rabbit
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - b5-net
+
+  # prometheus:
+  #   container_name: prometheus
+  #   image: prom/prometheus:v2.23.0
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  #     - ./alert.rules:/etc/prometheus/alert.rules
+  #   networks:
+  #     - b5-net
+  #   ports:
+  #     - 9090:9090
+
+  # alertmanager:
+  #   container_name: alertmanager
+  #   image: prom/alertmanager
+  #   volumes:
+  #     - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+  #   networks:
+  #     - b5-net
+  #   ports:
+  #     - 9093:9093
+  #   depends_on:
+  #     - prometheus
+
+  # grafana:
+  #   container_name: grafana/grafana:7.3.4
+  #   image: grafana:latest
+  #   volumes:
+  #     - ./grafana:/var/lib/grafana
+  #   networks:
+  #     - b5-net
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - prometheus
+
+networks:
+  b5-net:
+    driver: bridge
