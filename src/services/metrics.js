@@ -5,10 +5,12 @@ const packageJson = require('../../package.json');
 const mongo = require('../database/mongo');
 const queue = require('../services/queue');
 
+// Registrar tempo para interações com o banco de dados
 const registerDatabaseTime = (status, method, table, error = '', start) => {
   Monitor.collectDependencyTime('DATABASE', 'odbc', status, method, table, error, start);
 };
 
+// Registrar tempo para processar requisições da fila
 const registerQueueTime = (status, queueName, error = '', start) => {
   Monitor.collectRequestTime('amqp', status, queueName, start, error);
 };
