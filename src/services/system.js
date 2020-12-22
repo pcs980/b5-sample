@@ -9,9 +9,16 @@ const readyStatus = (req, res) => {
 };
 
 const healthStatus = (req, res) => {
-  res.status(200).json({
-    healthy: true,
-    database: mongo.isAlive()
+  const mongoAlive = mongo.isAlive();
+  const brokerAlive = true;
+
+  const appHealthy = mongoAlive && brokerAlive;
+  const status = appHealthy ? 200 : 503;
+
+  res.status(status).json({
+    healthy: appHealthy,
+    database: mongoAlive,
+    queue: brokerAlive
   });
 };
 

@@ -20,6 +20,17 @@ services:
     networks:
       - b5-net
 
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.23.0
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    networks:
+      - b5-net
+
 networks:
   b5-net:
     driver: bridge
