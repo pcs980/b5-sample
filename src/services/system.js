@@ -1,6 +1,7 @@
 'use strict';
 
 const mongo = require('../database/mongo');
+const queue = require('./queue');
 
 const readyStatus = (req, res) => {
   res.status(200).json({
@@ -10,7 +11,7 @@ const readyStatus = (req, res) => {
 
 const healthStatus = (req, res) => {
   const mongoAlive = mongo.isAlive();
-  const brokerAlive = true;
+  const brokerAlive = queue.isReady();
 
   const appHealthy = mongoAlive && brokerAlive;
   const status = appHealthy ? 200 : 503;
