@@ -92,6 +92,7 @@ const update = async (req, res) => {
   }
 };
 
+// Registra bloqueio recebido por mensagem em fila
 const block = async (work) => {
   const start = process.hrtime();
   const { id, blockType } = work.getPayload();

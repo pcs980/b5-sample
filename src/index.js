@@ -12,7 +12,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Inicializa utilitário para métricas
+// Inicializa utilitário de métricas
 metrics.init(app);
 
 // Preparar endpoints
