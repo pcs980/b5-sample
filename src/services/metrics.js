@@ -7,7 +7,7 @@ const queue = require('../services/queue');
 
 // Registrar tempo para interações com o banco de dados
 const registerDatabaseTime = (status, method, table, error = '', start) => {
-  Monitor.collectDependencyTime('DATABASE', 'odbc', status, method, table, error, start);
+  Monitor.collectDependencyTime('database', 'odbc', status, method, table, error, start);
 };
 
 // Registrar tempo para processar requisições da fila
@@ -25,7 +25,7 @@ const init = (app) => {
     });
 
     register({
-      name: 'queue',
+      name: 'amqp',
       up: queue.isReady()
     })
   });
